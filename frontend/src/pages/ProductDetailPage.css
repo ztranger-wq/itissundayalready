@@ -1,0 +1,496 @@
+/* Updated Product Detail Page for smooth, simple, light color style inspired by Allbirds */
+
+.product-detail-page {
+    padding: 2rem 1rem 0;
+    background: #fafafa; /* lighter neutral background */
+    min-height: 100vh;
+}
+
+.product-detail-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 3rem; /* more airy spacing */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 0;
+}
+
+.product-gallery-container {
+    max-width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.product-gallery-container img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+}
+
+@media (min-width: 768px) {
+    .product-detail-layout {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .product-detail-layout {
+        gap: 5rem;
+    }
+}
+
+.product-info-container {
+    display: flex;
+    flex-direction: column;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 2.5rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e5e7eb; /* subtle border */
+}
+
+.product-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.1;
+    color: #334155; /* softer dark */
+    letter-spacing: -0.02em;
+}
+
+@media (max-width: 767px) {
+    .product-title {
+        font-size: 2rem;
+    }
+}
+
+.product-rating {
+    margin-bottom: 1.5rem;
+    color: #64748b;
+    font-size: 1.1rem;
+}
+
+.product-rating a {
+    color: #475569;
+    text-decoration: none;
+    margin-left: 0.5rem;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.product-rating a:hover {
+    color: #334155;
+}
+
+.product-price {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: #475569; /* muted dark */
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.product-price::before {
+    content: "₹";
+    font-size: 1.5rem;
+    color: #475569;
+}
+
+@media (max-width: 767px) {
+    .product-price {
+        font-size: 1.75rem;
+    }
+}
+
+.product-short-desc {
+    font-size: 1.125rem;
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    color: #64748b;
+    font-weight: 400;
+}
+
+/* Customization Options Styling */
+.advanced-options {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 1px solid #d1d5db;
+}
+
+.advanced-options h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.config-section {
+    margin-bottom: 2rem;
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    border: 1px solid #d1d5db;
+}
+
+.config-label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #475569;
+    font-size: 1.1rem;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    border: 1.5px solid #d1d5db;
+    border-radius: 12px;
+    width: fit-content;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.quantity-selector button {
+    background: #f3f4f6;
+    border: none;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #475569;
+    transition: all 0.2s ease;
+}
+
+.quantity-selector button:hover {
+    background: #e5e7eb;
+    color: #334155;
+}
+
+.quantity-selector input {
+    width: 5rem;
+    text-align: center;
+    border: none;
+    border-left: 1.5px solid #d1d5db;
+    border-right: 1.5px solid #d1d5db;
+    padding: 1rem 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    background: white;
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+.quantity-selector input::-webkit-outer-spin-button,
+.quantity-selector input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.add-to-cart-btn-large {
+    padding: 1.25rem 2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    border-radius: 12px;
+    background: #f3f4f6; /* light background */
+    color: #334155; /* dark text */
+    border: 1.5px solid #d1d5db;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: none;
+}
+
+.add-to-cart-btn-large:hover {
+    background: #e5e7eb;
+    border-color: #475569;
+    color: #1e293b;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.add-to-cart-btn-large.added {
+    background: #d1fae5; /* subtle green */
+    border-color: #10b981;
+    color: #065f46;
+    box-shadow: none;
+}
+
+.add-to-cart-btn-large.added:hover {
+    background: #a7f3d0;
+    border-color: #047857;
+    color: #064e3b;
+    box-shadow: 0 4px 12px rgba(6, 95, 70, 0.3);
+}
+
+.quote-button {
+    padding: 1.25rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    border-radius: 12px;
+    background: #fef3c7; /* light yellow */
+    color: #92400e;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: none;
+}
+
+.quote-button:hover {
+    background: #fde68a;
+    box-shadow: 0 4px 12px rgba(149, 115, 0, 0.3);
+}
+
+.product-accordion {
+    border-top: 1.5px solid #d1d5db;
+    margin-top: 2rem;
+}
+
+.accordion-item {
+    padding: 2rem 0;
+    border-bottom: 1px solid #d1d5db;
+}
+
+.accordion-title {
+    font-size: 1.375rem;
+    font-weight: 700;
+    margin: 0 0 1.5rem 0;
+    color: #334155;
+}
+
+.page-loader {
+    text-align: center;
+    padding: 5rem 0;
+    font-size: 1.5rem;
+    color: #64748b;
+    font-weight: 600;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #334155;
+    letter-spacing: -0.02em;
+}
+
+.related-products-section {
+    background: #fafafa;
+    padding: 5rem 1rem;
+    margin-top: 5rem;
+    border-top: 1.5px solid #d1d5db;
+}
+
+.reviews-section {
+    margin-top: 5rem;
+    background: white;
+    border-radius: 16px;
+    padding: 3rem 2rem;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e5e7eb;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.review-list {
+    margin-bottom: 3rem;
+}
+
+.review-item {
+    border-bottom: 1px solid #d1d5db;
+    padding: 1.5rem;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.review-item strong {
+    font-weight: 700;
+    color: #334155;
+    font-size: 1.1rem;
+}
+
+.review-item .rating {
+    margin: 0.75rem 0;
+}
+
+.review-date {
+    font-size: 0.875rem;
+    color: #64748b;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.review-form-container {
+    background: #fafafa;
+    padding: 2.5rem;
+    border-radius: 16px;
+    max-width: 700px;
+    margin: 3rem auto 0 auto;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.07);
+    border: 1px solid #e5e7eb;
+}
+
+.review-form-container .section-title {
+    text-align: left;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    color: #334155;
+    font-weight: 700;
+}
+
+.review-form-container .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.review-form-container textarea {
+    resize: vertical;
+    border-radius: 8px;
+    border: 1.5px solid #d1d5db;
+    padding: 1rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.review-form-container textarea:focus {
+    outline: none;
+    border-color: #475569;
+}
+
+.review-form-container select {
+    border-radius: 8px;
+    border: 1.5px solid #d1d5db;
+    padding: 1rem;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+    background: white;
+}
+
+.review-form-container select:focus {
+    outline: none;
+    border-color: #475569;
+}
+
+/* Error and Success Messages */
+.error-message {
+    background: #fef2f2;
+    color: #b91c1c;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #fecaca;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.success-message {
+    background: #dcfce7;
+    color: #15803d;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #bbf7d0;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+/* Customization Options - Interactive, Clean, Modern, Professional */
+
+.customization-option {
+    background: white;
+    border: 1.5px solid #d1d5db;
+    border-radius: 12px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.75rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.customization-option:hover {
+    border-color: #475569;
+    box-shadow: 0 6px 20px rgba(71, 85, 105, 0.15);
+}
+
+.customization-option label {
+    display: block;
+    font-weight: 700;
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+    color: #334155;
+}
+
+.customization-option select,
+.customization-option input[type="file"],
+.customization-option input[type="number"],
+.customization-option textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 8px;
+    background: #f9fafb;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: inherit;
+}
+
+.customization-option select:focus,
+.customization-option input[type="file"]:focus,
+.customization-option input[type="number"]:focus,
+.customization-option textarea:focus {
+    outline: none;
+    border-color: #475569;
+    box-shadow: 0 0 8px rgba(71, 85, 105, 0.4);
+    background: white;
+}
+
+.customization-option p {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: #64748b;
+    font-style: italic;
+}
+
+/* Specific customization option tweaks */
+
+.customization-option.upload-artwork input[type="file"] {
+    cursor: pointer;
+}
+
+.customization-option.upload-artwork p {
+    font-weight: 600;
+    color: #334155;
+}
+
+/* Advanced Options Toggle Styling */
+.show-advanced-toggle {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.show-advanced-toggle input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.show-advanced-toggle label {
+    font-weight: 700;
+    font-size: 1.125rem;
+    color: #334155;
+    cursor: pointer;
+}

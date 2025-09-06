@@ -1,0 +1,8 @@
+.rating {
+    display: flex;
+    align-items: center;
+}
+
+.rating-text {
+    margin-left: 0.5rem;
+}

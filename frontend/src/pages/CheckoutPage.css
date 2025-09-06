@@ -1,0 +1,10 @@
+.checkout-page {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.checkout-page h1 {
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}

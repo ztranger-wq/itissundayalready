@@ -1,0 +1,165 @@
+/* General Hero Section Container */
+.new-hero-section {
+  display: flex;
+  width: 100%;
+  height: 90vh; /* Increased height to make it more square-like */
+  background-color: #f0f0f0; /* Fallback background */
+  overflow: hidden;
+  position: relative;
+  padding: 20px; /* Gap from screen edges */
+  gap: 20px; /* Gap between the two splits */
+}
+
+.hero-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Each half of the hero section */
+.hero-split {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px; /* Rounded corners */
+}
+
+/* Container for the scrolling grids to manage animations */
+.scrolling-grid-container {
+  display: flex; /* Use flexbox to manage columns */
+  height: 100%;
+  gap: 10px; /* Reduced distance between columns */
+}
+
+.scrolling-column-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced distance between rows */
+    flex-shrink: 0;
+    width: calc(25% - 7.5px); /* 4 columns with 10px gap */
+}
+
+.scrolling-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; /* Reduced distance between rows */
+}
+
+/* Staggered start positions for each column */
+.scrolling-column-wrapper:nth-child(1) { transform: translateY(-20px); }
+.scrolling-column-wrapper:nth-child(2) { transform: translateY(20px); }
+.scrolling-column-wrapper:nth-child(3) { transform: translateY(-40px); }
+.scrolling-column-wrapper:nth-child(4) { transform: translateY(40px); }
+
+
+/* Animation for scrolling up */
+@keyframes scrollUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* Animation for scrolling down */
+@keyframes scrollDown {
+  0% {
+    transform: translateY(-50%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.scrolling-grid-container.up .scrolling-column {
+  animation: scrollUp 70s linear infinite;
+}
+
+.scrolling-grid-container.down .scrolling-column {
+  animation: scrollDown 70s linear infinite;
+}
+
+.grid-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 10px; /* Slightly rounded images */
+}
+
+/* Text Overlay and Cloud Effect */
+.hero-text-overlay {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 3;
+}
+
+.hero-link.left .hero-text-overlay {
+  left: 0;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.hero-link.right .hero-text-overlay {
+  right: 0;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.hero-text-overlay h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+  z-index: 4; /* Ensure text is above the cloud */
+  background: linear-gradient(to right, #000, #666);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.cloud-background {
+  position: absolute;
+  width: 60%;
+  height: 40%;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  filter: blur(40px);
+  z-index: 2;
+  animation: pulse 10s ease-in-out infinite alternate, drift 30s linear infinite alternate;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(-2%, -2%) scale(1);
+  }
+  50% {
+    transform: translate(2%, 2%) scale(1.05);
+  }
+  100% {
+    transform: translate(-2%, -2%) scale(1);
+  }
+}
+
+
+

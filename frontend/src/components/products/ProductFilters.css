@@ -1,0 +1,314 @@
+.filters-container {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border-radius: 1rem;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+  }
+  
+  .filters-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  
+  .filters-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin: 0;
+  }
+  
+  .filters-reset {
+    background: none;
+    border: 1px solid #d1d5db;
+    color: #6b7280;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .filters-reset:hover {
+    border-color: var(--main-red);
+    color: var(--main-red);
+  }
+  
+  /* Search Bar */
+  .search-bar {
+    position: relative;
+    margin-bottom: 2rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    background-color: white;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+  
+  .search-input:focus {
+    outline: none;
+    border-color: var(--main-red);
+    box-shadow: 0 0 0 4px rgba(229, 0, 0, 0.1);
+  }
+  
+  .search-input::placeholder {
+    color: #9ca3af;
+  }
+  
+  .search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #9ca3af;
+    pointer-events: none;
+  }
+  
+  .search-clear {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+  }
+  
+  .search-clear:hover {
+    color: #6b7280;
+    background-color: #f3f4f6;
+  }
+  
+  /* Filter Buttons */
+  .filter-buttons-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .filter-section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.75rem 0;
+  }
+  
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .filter-btn {
+    padding: 0.75rem 1.5rem;
+    background-color: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 0.75rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: #374151;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .filter-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    transition: left 0.5s;
+  }
+  
+  .filter-btn:hover::before {
+    left: 100%;
+  }
+  
+  .filter-btn:hover {
+    border-color: var(--main-red);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(229, 0, 0, 0.15);
+  }
+  
+  .filter-btn.active {
+    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
+    color: white;
+    border-color: var(--main-red);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(229, 0, 0, 0.3);
+  }
+  
+  .filter-btn.active:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(229, 0, 0, 0.4);
+  }
+  
+  /* Filter Count Badge */
+  .filter-count {
+    background-color: #f3f4f6;
+    color: #6b7280;
+    padding: 0.25rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 0.5rem;
+  }
+  
+  .filter-btn.active .filter-count {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+  }
+  
+  /* Advanced Filters Toggle */
+  .advanced-filters-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: var(--main-red);
+    font-weight: 500;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .advanced-filters-toggle:hover {
+    background-color: rgba(229, 0, 0, 0.05);
+  }
+  
+  .advanced-filters {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e5e7eb;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .filter-group label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #374151;
+  }
+  
+  .filter-select {
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    background-color: white;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .filter-select:focus {
+    outline: none;
+    border-color: var(--main-red);
+    box-shadow: 0 0 0 3px rgba(229, 0, 0, 0.1);
+  }
+  
+  /* Price Range Slider */
+  .price-range {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .price-inputs {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .price-input {
+    flex: 1;
+    padding: 0.5rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    font-size: 0.875rem;
+  }
+  
+  .price-separator {
+    color: #6b7280;
+    font-weight: 500;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .filters-container {
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .filters-header {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1rem;
+    }
+    
+    .filter-buttons {
+      justify-content: center;
+    }
+    
+    .advanced-filters {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    .filter-btn {
+      padding: 0.625rem 1.25rem;
+      font-size: 0.8125rem;
+    }
+    
+    .search-input {
+      padding: 0.875rem 0.875rem 0.875rem 2.75rem;
+    }
+  }
+  
+  /* Animation for filter buttons */
+  .filter-buttons .filter-btn {
+    animation: slideInUp 0.4s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  .filter-buttons .filter-btn:nth-child(1) { animation-delay: 0.1s; }
+  .filter-buttons .filter-btn:nth-child(2) { animation-delay: 0.2s; }
+  .filter-buttons .filter-btn:nth-child(3) { animation-delay: 0.3s; }
+  .filter-buttons .filter-btn:nth-child(4) { animation-delay: 0.4s; }
+  
+  @keyframes slideInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

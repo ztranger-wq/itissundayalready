@@ -1,0 +1,105 @@
+.custom-select-container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 1.5rem;
+  font-family: inherit;
+}
+
+.custom-select-label {
+  display: block;
+  font-weight: 700;
+  font-size: 1.125rem;
+  margin-bottom: 0.5rem;
+  color: #1e293b;
+}
+
+.custom-select-display {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9fafb;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-select-display.open {
+  border-color: #dc2626;
+  box-shadow: 0 0 8px rgba(220, 38, 38, 0.4);
+  background: white;
+}
+
+.custom-select-image {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  margin-right: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+}
+
+.custom-select-text {
+  flex-grow: 1;
+  font-size: 1rem;
+  color: #1e293b;
+}
+
+.custom-select-placeholder {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.custom-select-arrow {
+  font-size: 1.25rem;
+  color: #64748b;
+  margin-left: 0.5rem;
+}
+
+.custom-select-options {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  background: white;
+  border: 1.5px solid #cbd5e1;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.custom-select-option {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.custom-select-option:hover,
+.custom-select-option.selected {
+  background-color: #dc2626;
+  color: white;
+}
+
+.custom-select-option.selected .custom-select-image {
+  border-color: white;
+}
+
+.custom-select-option .custom-select-image {
+  margin-right: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid #e2e8f0;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}

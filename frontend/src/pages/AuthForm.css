@@ -1,0 +1,117 @@
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 1.5rem;
+    background-color: var(--light-gray);
+}
+
+.auth-form-wrapper {
+    background-color: white;
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 28rem; /* 448px */
+}
+
+.auth-form-wrapper h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    box-sizing: border-box; /* Important for width */
+}
+
+.auth-form-wrapper p a {
+    color: var(--main-red);
+    font-weight: 500;
+    text-decoration: none;
+}
+.auth-form-wrapper p a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    background-color: #fef2f2; /* red-50 */
+    color: #b91c1c; /* red-700 */
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.success-message {
+    background-color: #f0fdf4; /* green-50 */
+    color: #15803d; /* green-700 */
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: flex-end;
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.google-login-container {
+    margin-top: 1.5rem;
+    text-align: center;
+}
+
+.button-google-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.375rem;
+    background-color: white;
+    color: #374151;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+.button-google-login:hover {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.button-google-login:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: #3b82f6;
+    ring-offset: 2px;
+}
+
+.google-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}

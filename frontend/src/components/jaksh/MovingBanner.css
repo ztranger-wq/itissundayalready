@@ -1,0 +1,35 @@
+.moving-banner {
+    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
+    color: white;
+    padding: 1rem 0; /* Increased padding */
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .banner-content {
+    white-space: nowrap;
+    animation: scroll-banner 25s linear infinite;
+  }
+  
+  .moving-banner-text {
+    display: inline-block;
+    font-weight: 600;
+    font-size: 1.1rem; /* Increased font size */
+    letter-spacing: 0.025em;
+    padding: 0 2rem;
+    transition: opacity 0.5s ease;
+  }
+  
+  @keyframes scroll-banner {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+  
+  .moving-banner:hover .banner-content {
+    animation-play-state: paused;
+  }

@@ -1,0 +1,162 @@
+.order-confirmation-page {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+}
+
+.confirmation-content {
+  text-align: center;
+  background: #fff;
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.success-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.confirmation-content h1 {
+  color: #28a745;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+}
+
+.order-details {
+  text-align: left;
+  margin-top: 2rem;
+}
+
+.order-info,
+.shipping-info,
+.order-items,
+.order-total {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.order-details h2,
+.order-details h3 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.order-info p,
+.shipping-info p {
+  margin-bottom: 0.5rem;
+  color: #555;
+}
+
+.order-item {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.item-details {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: 500;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.item-brand,
+.item-quantity,
+.item-price {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 0.25rem;
+}
+
+.order-total {
+  text-align: center;
+  background: #e9ecef;
+}
+
+.order-total p {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 0;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.confirmation-actions .button-primary,
+.confirmation-actions .button-secondary {
+  padding: 0.75rem 2rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-primary {
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+
+.button-primary:hover {
+  background-color: #0056b3;
+}
+
+.button-secondary {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.button-secondary:hover {
+  background-color: #545b62;
+}
+
+@media (max-width: 768px) {
+  .order-confirmation-page {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .confirmation-content {
+    padding: 2rem 1rem;
+  }
+
+  .confirmation-actions {
+    flex-direction: column;
+  }
+
+  .order-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .item-image {
+    width: 100px;
+    height: 100px;
+  }
+}
