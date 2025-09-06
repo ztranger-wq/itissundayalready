@@ -1,6 +1,6 @@
 .stats-section {
     padding: 5rem 0;
-    background-color: var(--dark-gray);
+    background-color: #1a1a1a;
     color: white;
 }
 
@@ -14,7 +14,7 @@
 .stat-item h3 {
     font-size: 3rem;
     font-weight: 700;
-    color: var(--main-red);
+    color: #e50000;
     margin-bottom: 0.5rem;
 }
 

@@ -20,7 +20,6 @@ import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
-import ScrollProgressBar from './components/layout/ScrollProgressBar';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./index.css";
 
@@ -39,7 +38,6 @@ function App() {
           <OrderProvider>
             <CartProvider>
               <div className="app-container">
-                <ScrollProgressBar />
                 <Header />
                 <main>
                   <Routes>

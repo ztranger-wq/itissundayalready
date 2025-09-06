@@ -42,7 +42,7 @@ const Hero = () => {
         </div>
         <div className="hero-text-overlay">
           <div className="cloud-background"></div>
-          <h2>MS Labels</h2>
+          <h2>MS Enterprises</h2>
         </div>
       </Link>
       <Link to="/jaksh" className="hero-link right">

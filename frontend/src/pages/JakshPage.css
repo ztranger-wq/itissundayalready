@@ -23,7 +23,7 @@
 }
 
 .breadcrumb-current {
-  color: var(--main-red);
+  color: #e50000;
   font-weight: 500;
 }
 
@@ -84,13 +84,13 @@
 }
 
 .filters-toggle:hover {
-  border-color: var(--main-red);
-  color: var(--main-red);
+  border-color: #e50000;
+  color: #e50000;
 }
 
 .filters-toggle.active {
-  background-color: var(--main-red);
-  border-color: var(--main-red);
+  background-color: #e50000;
+  border-color: #e50000;
   color: white;
 }
 

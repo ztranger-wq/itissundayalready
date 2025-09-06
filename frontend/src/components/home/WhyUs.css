@@ -1,6 +1,6 @@
 .why-us-section {
     padding: 5rem 0;
-    background-color: var(--light-gray);
+    background-color: #f2f2f2;
 }
 
 .why-us-section h2 {
@@ -20,7 +20,7 @@
     background-color: white;
     padding: 2rem;
     border-radius: 0.5rem;
-    box-shadow: var(--shadow-lg);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

@@ -44,8 +44,8 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: var(--text-dark);
-  background-color: var(--bg-white);
+  color: #1a1a1a;
+  background-color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
@@ -124,24 +124,24 @@ main {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--main-red);
+  background-color: #e50000;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
-  border-radius: var(--border-radius-lg);
+  border-radius: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease;
   font-size: 1rem;
   line-height: 1.5;
   gap: 0.5rem;
 }
 
 .button-primary:hover {
-  background-color: var(--secondary-red);
+  background-color: #c00000;
   transform: translateY(-1px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .button-primary:disabled {
@@ -155,21 +155,21 @@ main {
   align-items: center;
   justify-content: center;
   background-color: transparent;
-  color: var(--main-red);
+  color: #e50000;
   padding: 0.75rem 1.5rem;
-  border: 2px solid var(--main-red);
-  border-radius: var(--border-radius-lg);
+  border: 2px solid #e50000;
+  border-radius: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   text-decoration: none;
-  transition: all var(--transition-normal);
+  transition: all 0.3s ease;
   font-size: 1rem;
   line-height: 1.5;
   gap: 0.5rem;
 }
 
 .button-secondary:hover {
-  background-color: var(--main-red);
+  background-color: #e50000;
   color: white;
 }
 
@@ -178,10 +178,10 @@ main {
   color: white;
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: var(--border-radius-md);
+  border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color var(--transition-normal);
+  transition: background-color 0.3s ease;
 }
 
 .button-danger:hover {
@@ -220,7 +220,7 @@ main {
 .image-reveal-container {
   position: relative;
   overflow: hidden;
-  border-radius: var(--border-radius-lg);
+  border-radius: 0.75rem;
 }
 
 .image-reveal-container::after {
@@ -230,7 +230,7 @@ main {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--main-red);
+  background-color: #e50000;
   transform: translateX(-101%);
   transition: transform 1s cubic-bezier(0.86, 0, 0.07, 1);
 }
@@ -262,7 +262,7 @@ main {
 
 /* Focus styles */
 *:focus {
-  outline: 2px solid var(--main-red);
+  outline: 2px solid #e50000;
   outline-offset: 2px;
 }
 
@@ -276,12 +276,12 @@ main {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--text-muted);
+  background: #6b7280;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--main-red);
+  background: #e50000;
 }
 
 /* Responsive adjustments */
