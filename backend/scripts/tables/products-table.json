@@ -1,0 +1,19 @@
+{
+  "TableName": "Products",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "productId",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "productId",
+      "KeyType": "HASH"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 1,
+    "WriteCapacityUnits": 1
+  }
+}

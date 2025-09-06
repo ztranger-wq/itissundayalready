@@ -6,70 +6,73 @@ import ProductsPage from "./pages/ProductsPage";
 import JakshPage from "./pages/JakshPage";
 import QuotePage from "./pages/QuotePage"; // Import the new page
 import CartPage from "./pages/CartPage";
-import LoginPage from "./pages/LoginPage";
-import RegisterPage from "./pages/RegisterPage";
 import ProfilePage from "./pages/ProfilePage";
 import WishlistPage from './pages/WishlistPage';
 import ProductDetailPage from './pages/ProductDetailPage';
-import ForgotPasswordPage from './pages/ForgotPasswordPage';
-import ResetPasswordPage from './pages/ResetPasswordPage';
 import ShippingAddressPage from './pages/ShippingAddressPage';
 import PaymentPage from './pages/PaymentPage';
 import OrderConfirmationPage from './pages/OrderConfirmationPage';
+// TODO: The AuthProvider, CartProvider, and OrderProvider may need to be refactored or removed
+// depending on how state is managed with Amplify and React Query/SWR.
 import { AuthProvider } from "./context/AuthContext";
 import { CartProvider } from "./context/CartContext";
 import { OrderProvider } from "./context/OrderContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
 import ScrollProgressBar from './components/layout/ScrollProgressBar';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import "./index.css";
 
-const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+// TODO: STEP 1: Set up Amplify
+// After running `amplify init` and `amplify add auth`, this file will be generated.
+// import { Amplify } from 'aws-amplify';
+// import awsExports from './aws-exports';
+// Amplify.configure(awsExports);
+
+// TODO: STEP 2: Import the Authenticator UI component
+// import { Authenticator } from '@aws-amplify/ui-react';
+// import '@aws-amplify/ui-react/styles.css';
 
 function App() {
-  // Add error handling for missing Google Client ID
-  if (!GOOGLE_CLIENT_ID) {
-    console.error('Google Client ID is not configured. Please add VITE_GOOGLE_CLIENT_ID to your .env file');
-  }
-
   return (
-    <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID || 'placeholder-client-id'}>
-      <Router>
-        <AuthProvider>
-          <OrderProvider>
-            <CartProvider>
-              <div className="app-container">
-                <ScrollProgressBar />
-                <Header />
-                <main>
-                  <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/products" element={<ProductsPage />} />
-                    <Route path="/jaksh" element={<JakshPage />} />
-                    <Route path="/quote" element={<QuotePage />} /> {/* Add the new route */}
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-                    <Route path="/reset-password/:token" element={<ResetPasswordPage />} />
-                    <Route path="/product/:id" element={<ProductDetailPage />} />
-                    <Route path="/checkout" element={<ShippingAddressPage />} />
-                    <Route path="/checkout/payment" element={<PaymentPage />} />
-                    <Route path="/checkout/success" element={<OrderConfirmationPage />} />
+    // TODO: STEP 3: Wrap the app in the Authenticator
+    // This will handle the entire sign-up/sign-in/forgot-password flow.
+    // <Authenticator>
+    //   {({ signOut, user }) => (
+        <Router>
+          {/* The existing providers might be refactored or replaced by a centralized state management solution like Redux or Zustand alongside Amplify */}
+          <AuthProvider>
+            <OrderProvider>
+              <CartProvider>
+                <div className="app-container">
+                  <ScrollProgressBar />
+                  {/* The Header component will need to be updated to use the `signOut` and `user` props from the Authenticator */}
+                  <Header />
+                  <main>
+                    <Routes>
+                      <Route path="/" element={<HomePage />} />
+                      <Route path="/products" element={<ProductsPage />} />
+                      <Route path="/jaksh" element={<JakshPage />} />
+                      <Route path="/quote" element={<QuotePage />} />
+                      <Route path="/cart" element={<CartPage />} />
+                      <Route path="/product/:id" element={<ProductDetailPage />} />
+                      <Route path="/checkout" element={<ShippingAddressPage />} />
+                      <Route path="/checkout/payment" element={<PaymentPage />} />
+                      <Route path="/checkout/success" element={<OrderConfirmationPage />} />
 
-                    <Route element={<ProtectedRoute />}>
-                      <Route path="/wishlist" element={<WishlistPage />} />
-                      <Route path="/profile" element={<ProfilePage />} />
-                    </Route>
-                  </Routes>
-                </main>
-                <Footer />
-              </div>
-            </CartProvider>
-          </OrderProvider>
-        </AuthProvider>
-      </Router>
-    </GoogleOAuthProvider>
+                      {/* ProtectedRoute will need to be refactored to check the Amplify auth state */}
+                      <Route element={<ProtectedRoute />}>
+                        <Route path="/wishlist" element={<WishlistPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                      </Route>
+                    </Routes>
+                  </main>
+                  <Footer />
+                </div>
+              </CartProvider>
+            </OrderProvider>
+          </AuthProvider>
+        </Router>
+    //   )}
+    // </Authenticator>
   );
 }
 

@@ -1,21 +1,27 @@
 import axios from 'axios';
 
+// TODO: After setting up Amplify, import it here.
+// import { Auth } from 'aws-amplify';
+
 const api = axios.create({
-  // Changed baseURL from AWS API Gateway to localhost for local development
-  baseURL: 'http://localhost:5001/api',
+  // This should point to your local SAM API endpoint
+  baseURL: import.meta.env.VITE_API_URL || 'http://127.0.0.1:3000/api',
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Intercepts every request to inject the auth token if it exists.
-api.interceptors.request.use((config) => {
-  const user = localStorage.getItem('user');
-  if (user) {
-    const { token } = JSON.parse(user);
-    if (token) {
-      config.headers.Authorization = `Bearer ${token}`;
-    }
+// TODO: This interceptor should be updated to use Amplify Auth.
+// It will fetch the current user's session and inject the JWT token.
+api.interceptors.request.use(async (config) => {
+  try {
+    // const session = await Auth.currentSession();
+    // const token = session.getIdToken().getJwtToken();
+    // if (token) {
+    //   config.headers.Authorization = `Bearer ${token}`;
+    // }
+  } catch (e) {
+    // console.log('No user session found');
   }
   return config;
 });

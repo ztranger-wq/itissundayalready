@@ -1,0 +1,45 @@
+{
+  "TableName": "Orders",
+  "AttributeDefinitions": [
+    {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+    },
+    {
+      "AttributeName": "orderId",
+      "AttributeType": "S"
+    }
+  ],
+  "KeySchema": [
+    {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+    },
+    {
+      "AttributeName": "orderId",
+      "KeyType": "RANGE"
+    }
+  ],
+  "ProvisionedThroughput": {
+    "ReadCapacityUnits": 2,
+    "WriteCapacityUnits": 2
+  },
+  "GlobalSecondaryIndexes": [
+    {
+      "IndexName": "OrderIdIndex",
+      "KeySchema": [
+        {
+          "AttributeName": "orderId",
+          "KeyType": "HASH"
+        }
+      ],
+      "Projection": {
+        "ProjectionType": "ALL"
+      },
+      "ProvisionedThroughput": {
+        "ReadCapacityUnits": 1,
+        "WriteCapacityUnits": 1
+      }
+    }
+  ]
+}

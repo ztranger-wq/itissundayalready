@@ -1,69 +1,109 @@
-# MSJAKSH
+# Serverless E-Commerce Application
 
-## AWS Serverless Deployment
+This project is a full-stack e-commerce application that has been migrated from a traditional Node.js/Express/MongoDB monolith to a modern serverless architecture using AWS SAM, Lambda, API Gateway, DynamoDB, and Cognito.
 
-This project has been configured to be deployed to AWS using the Serverless Framework. The backend will be deployed as an AWS Lambda function with an API Gateway trigger, and the frontend will be hosted on an S3 bucket.
+## Architecture Overview
 
-### Prerequisites
+*   **Backend**: A set of AWS Lambda functions managed by AWS SAM. Each function corresponds to a single API endpoint.
+*   **API**: An Amazon API Gateway sits in front of the Lambda functions, routing HTTP requests.
+*   **Database**: Amazon DynamoDB is used as the primary database, with a local instance for development.
+*   **Authentication**: AWS Cognito handles user authentication, supporting both email/password and Google Sign-In.
+*   **Notifications**: AWS SES and SNS are used for email and SMS notifications (stubbed for local development).
+*   **Frontend**: A React application built with Vite.
 
-1.  **Install Node.js and npm:** Make sure you have Node.js and npm installed on your machine.
-2.  **Install Serverless CLI:**
-    ```bash
-    npm install -g serverless
-    ```
-3.  **Configure AWS Credentials:**
-    Make sure you have your AWS credentials configured on your machine. The Serverless Framework uses the AWS SDK for JavaScript, which looks for credentials in the following order:
-    - Environment variables (`AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`).
-    - The shared credentials file (`~/.aws/credentials`).
-    - IAM roles for EC2 instances.
+## Prerequisites
 
-    For more information, see the [AWS documentation](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/setting-credentials-node.html).
+Make sure you have the following tools installed on your system:
+*   [AWS CLI](https://aws.amazon.com/cli/)
+*   [AWS SAM CLI](https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html)
+*   [Docker](https://www.docker.com/products/docker-desktop/)
+*   [Node.js](https://nodejs.org/en/) (v18 or later)
 
-### Backend Deployment
+## Local Development Setup
 
-1.  **Navigate to the backend directory:**
-    ```bash
-    cd backend
-    ```
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-3.  **Create a `.env` file:**
-    Create a `.env` file in the `backend` directory with the following environment variables:
-    ```
-    MONGO_URI=<your_mongodb_connection_string>
-    JWT_SECRET=<your_jwt_secret>
-    ```
-4.  **Deploy the service:**
-    ```bash
-    npm run deploy
-    ```
-    This command will deploy the backend service to AWS. After the deployment is complete, it will output the API Gateway endpoint URL. It will look something like this: `https://xxxxxxxxx.execute-api.us-east-1.amazonaws.com/dev`.
+Follow these steps to run the entire application stack on your local machine.
 
-### Frontend Deployment
+### 1. Backend Setup
 
-1.  **Update the API endpoint:**
-    Open `frontend/src/utils/api.js` and replace the placeholder URL with the actual API Gateway endpoint URL from the previous step.
+First, set up and run the serverless backend and the local database.
 
-2.  **Navigate to the frontend directory:**
-    ```bash
-    cd frontend
-    ```
-3.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-4.  **Build the frontend:**
-    ```bash
-    npm run build
-    ```
-    This will create a `dist` directory with the static files for the frontend.
+```bash
+# Navigate to the backend directory
+cd backend
 
-5.  **Deploy to S3:**
-    The `serverless deploy` command in the backend created an S3 bucket for the frontend. The bucket name is `mern-ecommerce-frontend-bucket-dev`. You need to upload the contents of the `frontend/dist` directory to this S3 bucket. You can do this using the AWS Management Console or the AWS CLI.
+# Install dependencies
+npm install
 
-    **Using AWS CLI:**
-    ```bash
-    aws s3 sync frontend/dist s3://mern-ecommerce-frontend-bucket-dev --delete
-    ```
+# Start the local DynamoDB database in the background
+# (Requires Docker to be running)
+docker-compose up -d
+
+# Create the necessary tables in the local DynamoDB instance
+npm run db:setup
+
+# Build the SAM application
+sam build
+
+# Start the local API Gateway, which will hot-reload your Lambda functions
+sam local start-api
+```
+Your backend API should now be running at `http://127.0.0.1:3000`.
+
+### 2. Frontend Setup
+
+In a separate terminal, set up and run the React frontend.
+
+```bash
+# Navigate to the frontend directory
+cd frontend
+
+# Install dependencies
+npm install
+
+# Create a local environment file from the example
+cp .env.example .env
+```
+
+**Manual Amplify Setup:**
+
+This project uses AWS Amplify for frontend authentication. Because the setup is environment-dependent, you need to initialize it manually.
+
+```bash
+# 1. Initialize an Amplify project. Follow the interactive prompts.
+amplify init
+
+# 2. Add the authentication category.
+# Choose "Default configuration" and include "Google" as a social provider when prompted.
+amplify add auth
+
+# 3. (Optional but recommended) Run the local mock authentication server.
+# This allows you to test login/signup flows without a deployed backend.
+amplify mock auth
+```
+
+Finally, start the frontend development server:
+```bash
+# Start the React app
+npm run dev
+```
+Your frontend should now be accessible at `http://localhost:5173`. It will connect to the local backend API running at `http://127.0.0.1:3000`.
+
+## Deploying to AWS
+
+To deploy the entire backend to your AWS account, run the following command from the **root** of the project:
+
+```bash
+# Build the application for deployment
+sam build
+
+# Deploy the stack using a guided process
+sam deploy --guided
+```
+
+SAM will prompt you for several parameters during the first deployment, including:
+*   `Stack Name`: A unique name for this application stack (e.g., `my-ecommerce-app`).
+*   `AWS Region`: The region to deploy to.
+*   `GoogleClientId` and `GoogleClientSecret`: You will need to provide these from your Google Cloud Console credentials for the Cognito integration to work.
+*   Confirm changes before deploy: It's recommended to say `y` to review the changes.
+
+After the deployment is complete, SAM will output the real API endpoint URL, Cognito User Pool ID, and other resource names. You will need to use these outputs to configure your frontend for the deployed environment. This is typically done by creating a production `aws-exports.js` file or configuring environment variables in your CI/CD pipeline.

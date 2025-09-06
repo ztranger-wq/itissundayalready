@@ -1,0 +1,501 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  A serverless application for the e-commerce backend.
+
+Parameters:
+  GoogleClientId:
+    Type: String
+    Description: "Google Client ID for Cognito Federated Identity"
+  GoogleClientSecret:
+    Type: String
+    NoEcho: true
+    Description: "Google Client Secret for Cognito Federated Identity"
+  ProductsTableName:
+    Type: String
+    Default: Products
+  UsersTableName:
+    Type: String
+    Default: Users
+  OrdersTableName:
+    Type: String
+    Default: Orders
+  CartTableName:
+    Type: String
+    Default: Cart
+
+Globals:
+  Api:
+    Auth:
+      DefaultAuthorizer: CognitoUserPoolAuthorizer
+      Authorizers:
+        CognitoUserPoolAuthorizer:
+          UserPoolArn: !GetAtt CognitoUserPool.Arn
+  Function:
+    Timeout: 10
+    Runtime: nodejs18.x
+    MemorySize: 128
+    Environment:
+      Variables:
+        PRODUCTS_TABLE_NAME: !Ref ProductsTableName
+        USERS_TABLE_NAME: !Ref UsersTableName
+        ORDERS_TABLE_NAME: !Ref OrdersTableName
+        CART_TABLE_NAME: !Ref CartTableName
+        FRONTEND_URL: http://localhost:5173
+        SENDER_EMAIL: "noreply@my-ecommerce-app.com" # Replace with a real verified email in production
+
+Resources:
+    PostConfirmationTriggerFunction:
+      Type: AWS::Serverless::Function
+      Properties:
+        CodeUri: backend/functions/triggers/
+        Handler: postConfirmationTrigger.handler
+        Policies:
+          - SESCrudPolicy:
+              IdentityName: !Ref SenderEmailIdentity
+
+  # Lambda Functions
+  GetProductsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/products/
+      Handler: getProducts.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/products
+            Method: GET
+            Auth:
+              Authorizer: NONE
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTableName
+
+  GetProductByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/products/
+      Handler: getProductById.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/products/{id}
+            Method: GET
+            Auth:
+              Authorizer: NONE
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTableName
+
+  CreateProductReviewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/products/
+      Handler: createProductReview.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/products/{id}/reviews
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTableName
+
+  DeleteProductReviewFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/products/
+      Handler: deleteProductReview.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/products/{id}/reviews/{reviewId}
+            Method: DELETE
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref ProductsTableName
+
+  GetCartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/cart/
+      Handler: getCart.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/cart
+            Method: GET
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref CartTableName
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTableName
+
+  AddItemToCartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/cart/
+      Handler: addItemToCart.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/cart
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CartTableName
+
+  RemoveItemFromCartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/cart/
+      Handler: removeItemFromCart.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/cart/{productId}
+            Method: DELETE
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CartTableName
+
+  MergeCartFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/cart/
+      Handler: mergeCart.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/cart/merge
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CartTableName
+
+  CreateOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: createOrder.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrdersTableName
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CartTableName
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTableName
+        - SESCrudPolicy:
+            IdentityName: !Ref SenderEmailIdentity
+
+  GetOrderByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: getOrderById.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/{id}
+            Method: GET
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref OrdersTableName
+
+  GetMyOrdersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: getMyOrders.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/myorders
+            Method: GET
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref OrdersTableName
+
+  UpdateOrderToPaidFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: updateOrderToPaid.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/{id}/pay
+            Method: PUT
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrdersTableName
+        - Statement:
+            - Effect: Allow
+              Action:
+                - sns:Publish
+              Resource: "*"
+
+  CancelOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: cancelOrder.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/{id}/cancel
+            Method: PUT
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrdersTableName
+
+  GetOrderStatsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: getOrderStats.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/stats
+            Method: GET
+      Policies:
+        - DynamoDBReadPolicy:
+            TableName: !Ref OrdersTableName
+
+  CreateCheckoutOrderFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/orders/
+      Handler: createCheckoutOrder.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/orders/checkout
+            Method: POST
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrdersTableName
+        - DynamoDBReadPolicy:
+            TableName: !Ref ProductsTableName
+
+  HandlePaymentWebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/payments/
+      Handler: handlePaymentWebhook.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/payments/webhook
+            Method: POST
+            Auth:
+              Authorizer: NONE
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OrdersTableName
+        - DynamoDBCrudPolicy:
+            TableName: !Ref CartTableName
+
+  HandlePaymentRedirectFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: backend/functions/payments/
+      Handler: handlePaymentRedirect.handler
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /api/payments/redirect
+            Method: GET
+            Auth:
+              Authorizer: NONE
+
+  SenderEmailIdentity:
+    Type: AWS::SES::EmailIdentity
+    Properties:
+      EmailIdentity: !Ref SENDER_EMAIL
+
+  PostConfirmationTriggerInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      Action: lambda:InvokeFunction
+      FunctionName: !GetAtt PostConfirmationTriggerFunction.Arn
+      Principal: cognito-idp.amazonaws.com
+      SourceArn: !GetAtt CognitoUserPool.Arn
+
+  # Cognito User Pool
+  CognitoUserPool:
+    Type: AWS::Serverless::UserPool
+    Properties:
+      LambdaConfig:
+        PostConfirmation: !GetAtt PostConfirmationTriggerFunction.Arn
+      UserPoolName: MyECommerceUserPool
+      Schema:
+        - Name: name
+          AttributeDataType: String
+          Mutable: true
+          Required: true
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 8
+          RequireLowercase: true
+          RequireNumbers: true
+          RequireSymbols: false
+          RequireUppercase: true
+      UsernameAttributes:
+        - email
+      AutoVerifiedAttributes:
+        - email
+
+  UserPoolGoogleProvider:
+    Type: AWS::Cognito::UserPoolIdentityProvider
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ProviderName: Google
+      ProviderType: Google
+      ProviderDetails:
+        client_id: !Ref GoogleClientId
+        client_secret: !Ref GoogleClientSecret
+        authorize_scopes: "profile email openid"
+      AttributeMapping:
+        email: email
+        name: name
+
+  UserPoolDomain:
+    Type: AWS::Cognito::UserPoolDomain
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      Domain: !Sub "my-ecommerce-app-${AWS::AccountId}"
+
+  UserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      UserPoolId: !Ref CognitoUserPool
+      ClientName: WebAppClient
+      GenerateSecret: false
+      SupportedIdentityProviders:
+        - COGNITO
+        - Google
+      CallbackURLs:
+        - http://localhost:5173
+      LogoutURLs:
+        - http://localhost:5173
+      AllowedOAuthFlows:
+        - code
+        - implicit
+      AllowedOAuthScopes:
+        - email
+        - openid
+        - profile
+      AllowedOAuthFlowsUserPoolClient: true
+
+  # DynamoDB Tables
+  ProductsTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: !Ref ProductsTableName
+      PrimaryKey:
+        Name: productId
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  UsersTable:
+    Type: AWS::Serverless::SimpleTable
+    Properties:
+      TableName: !Ref UsersTableName
+      PrimaryKey:
+        Name: userId
+        Type: String
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  OrdersTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref OrdersTableName
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: orderId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: orderId
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 2 # Increased for GSI
+        WriteCapacityUnits: 2 # Increased for GSI
+      GlobalSecondaryIndexes:
+        - IndexName: OrderIdIndex
+          KeySchema:
+            - AttributeName: orderId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
+  CartTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref CartTableName
+      AttributeDefinitions:
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: productId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: userId
+          KeyType: HASH
+        - AttributeName: productId
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+Outputs:
+  ProductsTableName:
+    Description: "Name of the Products DynamoDB table"
+    Value: !Ref ProductsTable
+  UsersTableName:
+    Description: "Name of the Users DynamoDB table"
+    Value: !Ref UsersTable
+  OrdersTableName:
+    Description: "Name of the Orders DynamoDB table"
+    Value: !Ref OrdersTable
+  CartTableName:
+    Description: "Name of the Cart DynamoDB table"
+    Value: !Ref CartTable
+  CognitoUserPoolId:
+    Description: "ID of the Cognito User Pool"
+    Value: !Ref CognitoUserPool
+  CognitoUserPoolClientId:
+    Description: "ID of the Cognito User Pool Client"
+    Value: !Ref UserPoolClient
