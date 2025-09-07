@@ -24,7 +24,7 @@ const googleLogin = async (req, res) => {
       headers: { Authorization: `Bearer ${access_token}` },
     });
 
-    const { email, name, picture } = data || {};
+    const { email, name, picture, sub } = data || {};
     if (!email) {
       return res.status(401).json({ message: 'Google did not return an email' });
     }
@@ -35,6 +35,7 @@ const googleLogin = async (req, res) => {
         name: name || email.split('@')[0],
         email,
         password: null,         // signals Google-only account
+        googleId: sub,          // set googleId for schema validation
         profilePic: picture || null,
         provider: 'google',
       });
@@ -136,6 +137,7 @@ const getUserProfile = async (req, res) => {
         preferences: user.preferences,
         loyaltyPoints: user.loyaltyPoints,
         membershipTier: user.membershipTier,
+        provider: user.provider,
         createdAt: user.createdAt,
       });
     } else {
@@ -339,6 +341,23 @@ const setDefaultAddress = async (req, res) => {
   }
 };
 
+const deleteAccount = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Delete the user account
+    await User.findByIdAndDelete(req.user._id);
+
+    res.json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    console.error('Delete account error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 module.exports = {
   googleLogin,
   registerUser,
@@ -350,4 +369,5 @@ module.exports = {
   updateAddress,
   deleteAddress,
   setDefaultAddress,
+  deleteAccount,
 };

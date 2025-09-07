@@ -31,6 +31,7 @@ const ProfilePage = () => {
   const [showDelete, setShowDelete] = useState(false), [deleteText, setDeleteText] = useState('');
   const [showChangePassword, setShowChangePassword] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
+  const [showGooglePopup, setShowGooglePopup] = useState(false);
   const [passwordData, setPasswordData] = useState({ currentPassword: '', newPassword: '', confirmPassword: '' });
   const [passwordMessage, setPasswordMessage] = useState(''), [passwordError, setPasswordError] = useState('');
 
@@ -309,18 +310,21 @@ const ProfilePage = () => {
                 <div className="action-content">
                   <h4>Change Password</h4>
                   <p>Update your account password for better security</p>
-              <button className="action-btn secondary" onClick={() => setShowChangePassword(true)}>Change Password</button>
-                </div>
-              </div>
-
-              <div className="action-card">
-                <div className="action-icon">
-                  <FaUser />
-                </div>
-                <div className="action-content">
-                  <h4>Privacy Settings</h4>
-                  <p>Control your data and privacy preferences</p>
-                  <button className="action-btn secondary">Manage Privacy</button>
+                  <button
+                    className="action-btn secondary"
+                    onClick={() => {
+                      console.log('User object:', user);
+                      console.log('Provider:', user?.provider);
+                      console.log('Is Google user:', user?.provider === 'google');
+                      if (user?.provider === 'google') {
+                        setShowGooglePopup(true);
+                      } else {
+                        setShowChangePassword(true);
+                      }
+                    }}
+                  >
+                    Change Password
+                  </button>
                 </div>
               </div>
             </div>
@@ -469,6 +473,22 @@ const ProfilePage = () => {
                 <div className="modal-actions">
                   <button className="btn-primary-modern" onClick={handleLogoutConfirm}>Confirm</button>
                   <button className="btn-secondary-modern" onClick={() => setShowLogoutConfirm(false)}>Cancel</button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Google Login Popup */}
+          {showGooglePopup && (
+            <div className="modal-overlay">
+              <div className="modal-content google-popup">
+                <div className="google-popup-content">
+                  <div className="google-icon">🔒</div>
+                  <h3>Login with Google doesn't support password change</h3>
+                  <p>Since you logged in with your Google account, you cannot change your password through this application.</p>
+                  <div className="modal-actions">
+                    <button className="btn-primary-modern" onClick={() => setShowGooglePopup(false)}>OK</button>
+                  </div>
                 </div>
               </div>
             </div>

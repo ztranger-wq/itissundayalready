@@ -10,6 +10,7 @@ const {
   updateAddress,
   deleteAddress,
   setDefaultAddress,
+  deleteAccount,
 } = require("../controllers/authController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -30,5 +31,5 @@ router.post("/profile/addresses", protect, addAddress);
 router.put("/profile/addresses/:id", protect, updateAddress);
 router.delete("/profile/addresses/:id", protect, deleteAddress);
 router.put("/profile/addresses/:id/default", protect, setDefaultAddress);
-
+router.delete("/profile", protect, deleteAccount);
 module.exports = router;

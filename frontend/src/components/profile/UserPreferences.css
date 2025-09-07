@@ -1,139 +1,229 @@
-.user-preferences {
-    max-width: 600px;
-  }
-  
-  .preferences-form {
-    background: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 2rem;
-  }
-  
-  .preference-section {
-    margin-bottom: 2rem;
-  }
-  
-  .preference-section:last-child {
+/* --- Global & Container --- */
+.user-preferences-container {
+  padding: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+.preferences-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  width: 100%;
+  max-width: 700px;
+  padding: 2rem;
+}
+
+/* --- Header --- */
+.section-header {
+  text-align: left;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.section-header h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.section-header p {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+/* --- Form & Sections --- */
+.preferences-form {
+  width: 100%;
+}
+
+.preference-section {
+  margin-bottom: 2.5rem;
+}
+
+.preference-section:last-of-type {
     margin-bottom: 0;
+}
+
+.preference-section h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0 0 1rem 0;
+}
+
+/* --- Preference Item --- */
+.preference-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.preference-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.preference-item:first-of-type {
+  padding-top: 0;
+}
+
+.preference-text label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #111827;
+  display: block;
+  cursor: pointer;
+}
+
+.preference-text p {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0.25rem 0 0;
+  max-width: 400px;
+}
+
+/* --- Toggle Switch --- */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #e50000;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #e50000;
+}
+
+input:checked + .slider:before {
+  transform: translateX(22px);
+}
+
+
+/* --- Form Actions --- */
+.form-actions {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #f3f4f6;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.button-primary {
+  background-color: #e50000;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.button-primary:hover {
+  background-color: #c00000;
+  box-shadow: 0 4px 12px rgba(229, 0, 0, 0.2);
+}
+
+.button-primary:disabled {
+  background-color: #fca5a5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- Messages --- */
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+}
+
+.message.success {
+  background-color: #f0fdf4;
+  color: #15803d;
+  border-color: #bbf7d0;
+}
+
+.message.error {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-color: #fecaca;
+}
+
+
+/* --- Responsive Design --- */
+@media (max-width: 640px) {
+  .preferences-card {
+    padding: 1.5rem;
   }
   
-  .preference-section h4 {
-    margin: 0 0 1rem 0;
-    color: #1a1a1a;
-    font-size: 1.125rem;
-    font-weight: 600;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #e5e7eb;
+  .section-header h3 {
+    font-size: 1.25rem;
   }
-  
-  .preference-group {
-    margin-bottom: 1rem;
-  }
-  
-  .preference-group:last-child {
-    margin-bottom: 0;
-  }
-  
-  .checkbox-label {
-    display: flex;
+
+  .preference-item {
+    flex-direction: column;
     align-items: flex-start;
     gap: 0.75rem;
-    cursor: pointer;
-    padding: 0.75rem;
-    border-radius: 6px;
-    transition: background-color 0.2s ease;
   }
-  
-  .checkbox-label:hover {
-    background-color: #f9fafb;
-  }
-  
-  .checkbox-label input[type="checkbox"] {
-    margin: 0;
-    margin-top: 0.125rem;
-    width: 16px;
-    height: 16px;
-    accent-color: #e50000;
-  }
-  
-  .checkbox-label span {
-    color: #374151;
-    font-size: 0.875rem;
-    line-height: 1.4;
-  }
-  
-  .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-  }
-  
-  .form-group {
-    margin-bottom: 1rem;
-  }
-  
-  .form-group label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-    color: #1a1a1a;
-    font-size: 0.875rem;
-  }
-  
-  .form-input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 0.875rem;
-    transition: border-color 0.2s ease;
-    background-color: white;
-  }
-  
-  .form-input:focus {
-    outline: none;
-    border-color: #e50000;
-    box-shadow: 0 0 0 3px rgba(229, 0, 0, 0.1);
+
+  .preference-control {
+    align-self: flex-end;
   }
   
   .form-actions {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid #e5e7eb;
+    flex-direction: column;
   }
   
   .button-primary {
-    background-color: #e50000;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border: none;
-    border-radius: 6px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    width: 100%;
+    text-align: center;
   }
-  
-  .button-primary:hover {
-    background-color: #c00000;
-  }
-  
-  .success-message {
-    background-color: #f0fdf4;
-    color: #16a34a;
-    padding: 0.75rem 1rem;
-    border-left: 4px solid #16a34a;
-    border-radius: 6px;
-    margin-bottom: 1rem;
-  }
-  
-  /* Responsive */
-  @media (max-width: 768px) {
-    .form-row {
-      grid-template-columns: 1fr;
-    }
-    
-    .preferences-form {
-      padding: 1.5rem;
-    }
-  }
-  
+}
