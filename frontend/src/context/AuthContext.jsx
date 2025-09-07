@@ -93,11 +93,29 @@ export const AuthProvider = ({ children }) => {
   };
 
   const toggleWishlist = async (productId) => {
-    // The backend should return the fully updated and populated user object.
-    const { data } = await api.put('/auth/profile/wishlist', { productId });
-    // Update state directly from the response, no extra fetch needed.
-    setUser(data);
-    setWishlist(data.wishlist || []);
+    // Optimistic UI update for wishlist
+    const isInWishlist = wishlist.some(p => p._id === productId);
+    let updatedWishlist;
+    if (isInWishlist) {
+      updatedWishlist = wishlist.filter(p => p._id !== productId);
+    } else {
+      // Add productId placeholder, actual product details may be fetched later
+      updatedWishlist = [...wishlist, { _id: productId }];
+    }
+    setWishlist(updatedWishlist);
+
+    try {
+      // The backend should return the fully updated and populated user object.
+      const { data } = await api.put('/auth/profile/wishlist', { productId });
+      // Update state directly from the response, no extra fetch needed.
+      setUser(data);
+      setWishlist(data.wishlist || []);
+    } catch (error) {
+      console.error('Failed to toggle wishlist:', error);
+      // Revert optimistic update on failure
+      setWishlist(wishlist);
+      throw error;
+    }
   };
 
   return (

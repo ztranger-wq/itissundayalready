@@ -77,7 +77,7 @@ const ProfilePage = () => {
     try {
       const storedUser = localStorage.getItem('user');
       const token = storedUser ? JSON.parse(storedUser).token : null;
-      const response = await fetch('/api/auth/profile/change-password', {
+      const response = await fetch(`${__API_BASE__}/api/auth/profile/change-password`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ currentPassword: passwordData.currentPassword, newPassword: passwordData.newPassword })
@@ -181,6 +181,7 @@ const ProfilePage = () => {
                       type="password"
                       value={passwordData.newPassword}
                       onChange={e => setPasswordData({ ...passwordData, newPassword: e.target.value })}
+                      minLength="8"
                       required
                     />
                   </div>

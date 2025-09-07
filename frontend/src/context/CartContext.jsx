@@ -4,7 +4,7 @@ import { AuthContext } from './AuthContext';
 
 export const CartContext = createContext();
 
-const API_URL = '/api/cart';
+const API_URL = `${__API_BASE__}/api/cart`;
 
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
@@ -65,6 +65,19 @@ export const CartProvider = ({ children }) => {
   }, [user, mergeGuestCart]);
 
   const addItemToCart = async (product, quantity = 1, customizationOptions = {}) => {
+    // Optimistic UI update for cart
+    const newCart = [...cart];
+    const itemIndex = newCart.findIndex(item => item.product._id === product._id);
+    if (itemIndex > -1) {
+      newCart[itemIndex].quantity += quantity;
+    } else {
+      newCart.push({ product, quantity, customizationOptions });
+    }
+    setCart(newCart);
+    if (!user) {
+      localStorage.setItem('cart', JSON.stringify(newCart));
+    }
+
     try {
       if (user) {
         const response = await axios.post(API_URL,
@@ -76,19 +89,14 @@ export const CartProvider = ({ children }) => {
           }
         );
         setCart(response.data || []);
-      } else {
-        const newCart = [...cart];
-        const itemIndex = newCart.findIndex(item => item.product._id === product._id);
-        if (itemIndex > -1) {
-          newCart[itemIndex].quantity += quantity;
-        } else {
-          newCart.push({ product, quantity, customizationOptions });
-        }
-        setCart(newCart);
-        localStorage.setItem('cart', JSON.stringify(newCart));
       }
     } catch (error) {
       console.error('Error adding item to cart:', error);
+      // Revert optimistic update on failure
+      setCart(cart);
+      if (!user) {
+        localStorage.setItem('cart', JSON.stringify(cart));
+      }
       throw error;
     }
   };

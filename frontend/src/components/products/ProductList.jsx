@@ -4,7 +4,7 @@ import ProductCard from './ProductCard';
 import './ProductList.css';
 import { useDebounce } from '../../hooks/useDebounce';
 
-const API_URL = '/api/products';
+const API_URL = `${__API_BASE__}/api/products`;
 
 const ProductList = ({ brand, category, searchTerm, limit, sortOrder, viewMode = 'grid', priceRange }) => {
   const [products, setProducts] = useState([]);

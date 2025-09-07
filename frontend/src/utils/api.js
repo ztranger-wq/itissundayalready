@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  // Changed baseURL from AWS API Gateway to localhost for local development
-  baseURL: 'http://localhost:5001/api',
+  baseURL: `${__API_BASE__}/api`,
   headers: {
     'Content-Type': 'application/json',
   },

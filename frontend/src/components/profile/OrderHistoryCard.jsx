@@ -67,8 +67,8 @@ const OrderHistoryCard = ({ order }) => {
       <div className="order-items-preview">
         {order.orderItems.slice(0, 3).map((item, index) => (
           <div key={index} className="order-item-preview">
-            <img 
-              src={item.image || item.product?.images?.[0] || '/api/placeholder/60/60'} 
+            <img
+              src={item.image || item.product?.images?.[0] || `${__API_BASE__}/api/placeholder/60/60`}
               alt={item.name}
               className="item-image"
             />
@@ -128,8 +128,8 @@ const OrderHistoryCard = ({ order }) => {
               <h5>Items Ordered</h5>
               {order.orderItems.map((item, index) => (
                 <div key={index} className="detail-item">
-                  <img 
-                    src={item.image || item.product?.images?.[0] || '/api/placeholder/40/40'} 
+                  <img
+                    src={item.image || item.product?.images?.[0] || `${__API_BASE__}/api/placeholder/40/40`}
                     alt={item.name}
                     className="detail-item-image"
                   />

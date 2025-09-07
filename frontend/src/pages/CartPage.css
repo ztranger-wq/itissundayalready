@@ -19,6 +19,9 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
+    background-color: rgb(225, 216, 216);
+    border-radius: 0.5rem;
+    padding: 1.5rem;
 }
 
 @media (min-width: 1024px) {
@@ -26,6 +29,13 @@
         grid-template-columns: 2fr 1fr;
         gap: 3rem;
     }
+}
+
+.cart-items-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .cart-brand-section {
@@ -148,11 +158,12 @@
 }
 
 .order-summary-container {
-    background-color: #f9fafb;
+    background-color: white;
     padding: 2rem;
     border-radius: 0.5rem;
     position: sticky;
     top: 120px; /* Adjust based on header height */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .summary-title {

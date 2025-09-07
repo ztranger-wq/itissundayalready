@@ -70,7 +70,7 @@ const ShippingAddressPage = () => {
       if (!token) {
         throw new Error('No authentication token found');
       }
-      const response = await fetch('http://localhost:5001/api/auth/profile/addresses', {
+      const response = await fetch(`${__API_BASE__}/api/auth/profile/addresses`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

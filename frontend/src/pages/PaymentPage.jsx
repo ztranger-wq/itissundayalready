@@ -86,7 +86,7 @@ const PaymentPage = () => {
         orderNotes: ''
       };
 
-      const response = await fetch('/api/orders/checkout', {
+      const response = await fetch(`${__API_BASE__}/api/orders/checkout`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

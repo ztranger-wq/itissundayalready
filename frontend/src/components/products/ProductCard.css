@@ -18,7 +18,7 @@
   }
   
   .product-image-container {
-    height: 16rem;
+    height: 12rem;
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
@@ -38,8 +38,8 @@
   /* Wishlist Button */
   .like-btn {
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.65rem;
+    right: 0.25rem;
     background-color: transparent;
     border: none;
     border-radius: 50%;

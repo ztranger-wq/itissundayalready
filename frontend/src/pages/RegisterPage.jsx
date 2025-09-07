@@ -5,6 +5,48 @@ import { useGoogleLogin } from '@react-oauth/google';
 import api from '../utils/api';
 import './AuthForm.css';
 
+// Password strength component
+const PasswordStrength = ({ password }) => {
+  const getStrength = (pwd) => {
+    const length = pwd.length;
+    const hasLower = /[a-z]/.test(pwd);
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasNumber = /\d/.test(pwd);
+    const hasSymbol = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(pwd);
+
+    const types = [hasUpper, hasNumber, hasSymbol].filter(Boolean).length;
+
+    if (length < 8 || !hasLower) {
+      return { level: 'poor', color: '#ff4d4d', text: 'Poor' };
+    } else if (length >= 8 && types >= 2) {
+      return { level: 'strong', color: '#4caf50', text: 'Strong' };
+    } else if (length >= 8 && types >= 1) {
+      return { level: 'medium', color: '#ffa500', text: 'Medium' };
+    } else {
+      return { level: 'poor', color: '#ff4d4d', text: 'Poor' };
+    }
+  };
+
+  const strength = getStrength(password);
+
+  return (
+    <div className="password-strength">
+      <div className="strength-bar">
+        <div
+          className="strength-fill"
+          style={{
+            width: strength.level === 'poor' ? '33%' : strength.level === 'medium' ? '66%' : '100%',
+            backgroundColor: strength.color
+          }}
+        ></div>
+      </div>
+      <span className="strength-text" style={{ color: strength.color }}>
+        {strength.text}
+      </span>
+    </div>
+  );
+};
+
 const RegisterPage = () => {
   const { register, loginWithGoogle } = useContext(AuthContext);
   const [name, setName] = useState('');
@@ -89,8 +131,10 @@ const RegisterPage = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               autoComplete="new-password"
+              minLength="8"
               required
             />
+            {password && <PasswordStrength password={password} />}
           </div>
 
           <button type="submit" className="button-primary w-full">Create account</button>

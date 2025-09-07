@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../../context/CartContext';
 import { AuthContext } from '../../context/AuthContext';
@@ -9,6 +9,7 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
   const { user, wishlist = [], toggleWishlist } = useContext(AuthContext);
   const [isAdded, setIsAdded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isLikeLoading, setIsLikeLoading] = useState(false);
   const navigate = useNavigate();
 
   // Ensure wishlist is always an array
@@ -26,16 +27,17 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
     }
   };
 
-  const handleAddToCart = async (e) => {
+  const handleAddToCart = useCallback(async (e) => {
     e.stopPropagation();
+    if (isLoading) return; // Debounce
     if (!product) {
       console.error('Product is missing');
       return;
     }
-    
+
     setIsLoading(true);
     try {
-      addItemToCart(product);
+      await addItemToCart(product);
       setIsAdded(true);
       setTimeout(() => {
         setIsAdded(false);
@@ -43,25 +45,29 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     } finally {
-      setIsLoading(false);
+      setTimeout(() => setIsLoading(false), 500); // Debounce delay
     }
-  };
+  }, [isLoading, product, addItemToCart]);
 
-  const handleLike = async (e) => {
+  const handleLike = useCallback(async (e) => {
     e.stopPropagation();
+    if (isLikeLoading) return; // Debounce
     if (!user) {
       alert('Please log in to add items to your wishlist.');
       navigate('/login');
       return;
     }
 
+    setIsLikeLoading(true);
     try {
       await toggleWishlist(product._id);
     } catch (error) {
       console.error('Failed to toggle wishlist:', error);
       alert('Failed to update wishlist. Please try again.');
+    } finally {
+      setTimeout(() => setIsLikeLoading(false), 500); // Debounce delay
     }
-  };
+  }, [isLikeLoading, user, navigate, toggleWishlist, product._id]);
 
   const getCategoryBadge = (category) => {
     if (!category) return null;
@@ -79,7 +85,7 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
     const cleanPrice = String(price).replace(/[₹$€£¥₽₩₦₨₪₫₡₵₺₴₸₼₲₱₭₯₰₳₶₷₹₻₽₾₿]/g, '').trim();
     const numPrice = parseFloat(cleanPrice);
     if (isNaN(numPrice)) return '₹0';
-    return `₹${numPrice.toLocaleString('en-IN')}`;
+    return `${numPrice.toLocaleString('en-IN')}`;
   };
 
   // Ensure product has required properties
@@ -88,7 +94,7 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
   }
 
   const productImages = Array.isArray(product.images) ? product.images : [];
-  const productImage = productImages.length > 0 ? productImages[0] : '/api/placeholder/300/400';
+  const productImage = productImages.length > 0 ? productImages[0] : `${__API_BASE__}/api/placeholder/300/400`;
 
   return (
     <div 
@@ -105,9 +111,10 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
         
         {product.category && getCategoryBadge(product.category)}
         
-        <button 
-          onClick={handleLike} 
-          className={`like-btn ${isLiked ? 'liked' : ''}`}
+        <button
+          onClick={handleLike}
+          className={`like-btn ${isLiked ? 'liked' : ''} ${isLikeLoading ? 'loading' : ''}`}
+          disabled={isLikeLoading}
           aria-label={isLiked ? 'Remove from wishlist' : 'Add to wishlist'}
         >
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

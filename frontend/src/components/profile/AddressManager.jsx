@@ -61,8 +61,8 @@ const { updateProfile } = useContext(AuthContext);
         throw new Error('No authentication token found');
       }
       const url = editingAddress
-        ? `http://localhost:5001/api/auth/profile/addresses/${editingAddress._id}`
-        : 'http://localhost:5001/api/auth/profile/addresses';
+        ? `${__API_BASE__}/api/auth/profile/addresses/${editingAddress._id}`
+        : `${__API_BASE__}/api/auth/profile/addresses`;
 
       const method = editingAddress ? 'PUT' : 'POST';
 
@@ -109,7 +109,7 @@ const { updateProfile } = useContext(AuthContext);
         if (!token) {
           throw new Error('No authentication token found');
         }
-        const response = await fetch(`http://localhost:5001/api/auth/profile/addresses/${addressId}`, {
+        const response = await fetch(`${__API_BASE__}/api/auth/profile/addresses/${addressId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -143,7 +143,7 @@ const { updateProfile } = useContext(AuthContext);
       if (!token) {
         throw new Error('No authentication token found');
       }
-      const response = await fetch(`http://localhost:5001/api/auth/profile/addresses/${addressId}/default`, {
+      const response = await fetch(`${__API_BASE__}/api/auth/profile/addresses/${addressId}/default`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`

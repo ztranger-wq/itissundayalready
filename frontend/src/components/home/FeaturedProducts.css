@@ -18,7 +18,6 @@
     margin: 0 auto;
 }
 
-
 .product-item {
     position: relative;
     overflow: hidden;
@@ -26,10 +25,12 @@
 }
 
 .product-image {
-    width: 100%;
-    height: 100%;
+    width: 80%; /* Reduced from 100% */
+    height: 80%; /* Reduced from 100% */
     object-fit: cover;
     transition: transform 0.3s ease;
+    margin: auto;
+    display: block;
 }
 
 .product-overlay {

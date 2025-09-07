@@ -60,7 +60,7 @@ const ProductDetailPage = () => {
         setLoading(true);
         setProduct(null);
         setRelatedProducts([]);
-        const { data: productData } = await axios.get(`/api/products/${id}`);
+        const { data: productData } = await axios.get(`${__API_BASE__}/api/products/${id}`);
         setProduct(productData);
 
         if (productData) {
@@ -68,7 +68,7 @@ const ProductDetailPage = () => {
           params.append('category', productData.category);
           params.append('brand', productData.brand);
           params.append('limit', 4);
-          const { data: relatedData } = await axios.get(`/api/products?${params.toString()}`);
+          const { data: relatedData } = await axios.get(`${__API_BASE__}/api/products?${params.toString()}`);
           setRelatedProducts(relatedData.filter(p => p._id !== productData._id));
         }
       } catch (err) {
