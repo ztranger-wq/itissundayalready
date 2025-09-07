@@ -57,7 +57,7 @@
     flex-shrink: 0;
     width: 1.25rem;
     height: 1.25rem;
-    color: var(--main-red);
+    color: #e50000;
   }
   
   .contact-item a {
@@ -69,7 +69,7 @@
   }
   
   .contact-item a:hover {
-    color: var(--main-red);
+    color: #e50000;
   }
   
   .footer-navigation {
@@ -96,7 +96,7 @@
   }
   
   .social-link:hover {
-    background-color: var(--main-red);
+    background-color: #e50000;
     transform: scale(1.1);
   }
   

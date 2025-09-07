@@ -54,13 +54,13 @@
     transform: scale(1.1);
   }
   
-  .like-btn.liked {
-    color: var(--main-red);
-  }
+.like-btn.liked {
+  color: #e50000;
+}
   
-  .like-btn.liked svg {
-    fill: var(--main-red);
-  }
+.like-btn.liked svg {
+  fill: #e50000;
+}
   
   .like-btn svg {
     width: 1.25rem;
@@ -69,20 +69,20 @@
   }
   
   /* Product Badge */
-  .product-badge {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
-    color: white;
-    padding: 0.375rem 0.75rem;
-    border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    z-index: 5;
-  }
+.product-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: linear-gradient(135deg, #e50000 0%, #dc2626 100%);
+  color: white;
+  padding: 0.375rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  z-index: 5;
+}
   
   /* Product Content */
   .product-content {
@@ -142,21 +142,21 @@
   }
   
   /* Add to Cart Button */
-  .add-to-cart-btn {
-    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
-    color: white;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    border-radius: 0.75rem;
-    font-weight: 600;
-    font-size: 0.875rem;
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    min-width: 120px;
-    text-align: center;
-  }
+.add-to-cart-btn {
+  background: linear-gradient(135deg, #e50000 0%, #dc2626 100%);
+  color: white;
+  padding: 0.75rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  min-width: 120px;
+  text-align: center;
+}
   
   .add-to-cart-btn:hover {
     transform: translateY(-2px);

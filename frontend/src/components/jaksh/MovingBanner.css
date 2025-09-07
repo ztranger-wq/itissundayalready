@@ -1,5 +1,5 @@
 .moving-banner {
-    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
+    background: linear-gradient(135deg, #e50000 0%, #dc2626 100%);
     color: white;
     padding: 1rem 0; /* Increased padding */
     overflow: hidden;

@@ -34,10 +34,10 @@
     transition: all 0.2s ease;
   }
   
-  .filters-reset:hover {
-    border-color: var(--main-red);
-    color: var(--main-red);
-  }
+.filters-reset:hover {
+  border-color: #e50000;
+  color: #e50000;
+}
   
   /* Search Bar */
   .search-bar {
@@ -56,11 +56,11 @@
     box-sizing: border-box;
   }
   
-  .search-input:focus {
-    outline: none;
-    border-color: var(--main-red);
-    box-shadow: 0 0 0 4px rgba(229, 0, 0, 0.1);
-  }
+.search-input:focus {
+  outline: none;
+  border-color: #e50000;
+  box-shadow: 0 0 0 4px rgba(229, 0, 0, 0.1);
+}
   
   .search-input::placeholder {
     color: #9ca3af;
@@ -145,19 +145,19 @@
     left: 100%;
   }
   
-  .filter-btn:hover {
-    border-color: var(--main-red);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(229, 0, 0, 0.15);
-  }
+.filter-btn:hover {
+  border-color: #e50000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(229, 0, 0, 0.15);
+}
   
-  .filter-btn.active {
-    background: linear-gradient(135deg, var(--main-red) 0%, #dc2626 100%);
-    color: white;
-    border-color: var(--main-red);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(229, 0, 0, 0.3);
-  }
+.filter-btn.active {
+  background: linear-gradient(135deg, #e50000 0%, #dc2626 100%);
+  color: white;
+  border-color: #e50000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(229, 0, 0, 0.3);
+}
   
   .filter-btn.active:hover {
     transform: translateY(-3px);
@@ -181,19 +181,19 @@
   }
   
   /* Advanced Filters Toggle */
-  .advanced-filters-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: none;
-    border: none;
-    color: var(--main-red);
-    font-weight: 500;
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    transition: background-color 0.2s ease;
-  }
+.advanced-filters-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #e50000;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
   
   .advanced-filters-toggle:hover {
     background-color: rgba(229, 0, 0, 0.05);
@@ -229,11 +229,11 @@
     transition: border-color 0.2s ease;
   }
   
-  .filter-select:focus {
-    outline: none;
-    border-color: var(--main-red);
-    box-shadow: 0 0 0 3px rgba(229, 0, 0, 0.1);
-  }
+.filter-select:focus {
+  outline: none;
+  border-color: #e50000;
+  box-shadow: 0 0 0 3px rgba(229, 0, 0, 0.1);
+}
   
   /* Price Range Slider */
   .price-range {

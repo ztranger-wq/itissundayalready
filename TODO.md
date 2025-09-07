@@ -11,19 +11,19 @@
 - [x] frontend/src/pages/WishlistPage.css
 - [x] frontend/src/pages/AuthForm.css
 - [x] frontend/src/pages/QuotePage.css
+- [x] frontend/src/components/jaksh/CategoryCard.css
+- [x] frontend/src/components/layout/ScrollProgressBar.css
+- [x] frontend/src/components/layout/Footer.css
+- [x] frontend/src/components/jaksh/CategoryShowcase.css
+- [x] frontend/src/components/jaksh/JakshSubNav.css
+- [x] frontend/src/components/jaksh/MovingBanner.css
+- [x] frontend/src/components/jaksh/JakshHero.css
+- [x] frontend/src/components/layout/Header.css
+- [x] frontend/src/components/products/ProductFilters.css
+- [x] frontend/src/components/products/ProductImageGallery.css
+- [x] frontend/src/components/products/ProductCard.css
 
 ## Remaining Files to Update:
-- [ ] frontend/src/components/jaksh/CategoryCard.css
-- [ ] frontend/src/components/layout/ScrollProgressBar.css
-- [ ] frontend/src/components/layout/Footer.css
-- [ ] frontend/src/components/jaksh/CategoryShowcase.css
-- [ ] frontend/src/components/jaksh/JakshSubNav.css
-- [ ] frontend/src/components/jaksh/MovingBanner.css
-- [ ] frontend/src/components/jaksh/JakshHero.css
-- [ ] frontend/src/components/layout/Header.css
-- [ ] frontend/src/components/products/ProductFilters.css
-- [ ] frontend/src/components/products/ProductImageGallery.css
-- [ ] frontend/src/components/products/ProductCard.css
 - [ ] frontend/src/components/home/FeaturedProducts.css (no variables found)
 - [ ] frontend/src/components/home/NewHero.css (no variables found)
 

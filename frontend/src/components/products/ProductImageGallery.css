@@ -67,7 +67,7 @@
 }
 
 .thumbnail-item.active {
-    border-color: var(--main-red);
+    border-color: #e50000;
 }
 
 .thumbnail-item img {
