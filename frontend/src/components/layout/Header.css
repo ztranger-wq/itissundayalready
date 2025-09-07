@@ -1,5 +1,9 @@
+body {
+  background-color: rgb(225, 216, 216);
+}
 .header {
-  background-color: #fff;
+  background-color: rgb(225, 216, 216, 0.4);
+  backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   position: sticky;
   top: 1rem;
@@ -7,14 +11,16 @@
   right: 1rem;
   z-index: 50;
   border-radius: 1.5rem;
-  padding: 0 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 2rem;
 }
 
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 4.8rem;
+  height: 3.8rem;
   max-width: 1280px;
   margin: 0 auto;
 }
@@ -62,6 +68,8 @@
   font-size: 1.8rem;
   font-weight: 700;
   line-height: 1;
+  font-family: 'Merriweather Sans', serif;
+  font-weight: 400;
 }
 
 .search-bar-container {
@@ -89,9 +97,10 @@
 
 .search-input {
   width: 100%;
-  padding: 0.4rem 1rem 0.4rem 2.5rem;
+  height: 3rem;
+  padding: 0 1rem 0 2.5rem;
   border: 1px solid #d1d5db;
-  border-radius: 9999px;
+  border-radius: 50px !important;
   background-color: #f9fafb;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
@@ -249,7 +258,7 @@
 /* Tablet styles (768px and up) */
 @media (min-width: 768px) {
   .header-container {
-    height: 5.2rem;
+    height: 4.2rem;
   }
   
   .profile-menu {
@@ -282,7 +291,7 @@
 /* Desktop styles (1024px and up) */
 @media (min-width: 1024px) {
   .header-container {
-    height: 5.6rem;
+    height: 4.6rem;
   }
   
   .logo-img {
@@ -307,7 +316,7 @@
 /* Small mobile adjustments for cart badge and icons */
 @media (max-width: 480px) {
   .header-container {
-    height: 4.4rem;
+    height: 3.4rem;
   }
   
   .logo-img {

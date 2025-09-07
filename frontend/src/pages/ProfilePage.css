@@ -3,7 +3,7 @@
 .profile-page {
     min-height: 100vh;
     padding: 2rem 0;
-    background-color: #f5f5f5;
+    background-color: rgb(225, 216, 216);
   }
 
   .profile-loading {

@@ -128,7 +128,15 @@ const getUserProfile = async (req, res) => {
         name: user.name,
         email: user.email,
         profilePic: user.profilePic,
+        phone: user.phone,
+        dateOfBirth: user.dateOfBirth,
+        gender: user.gender,
+        addresses: user.addresses,
         wishlist: user.wishlist,
+        preferences: user.preferences,
+        loyaltyPoints: user.loyaltyPoints,
+        membershipTier: user.membershipTier,
+        createdAt: user.createdAt,
       });
     } else {
       res.status(404).json({ message: "User not found" });
@@ -146,6 +154,9 @@ const updateUserProfile = async (req, res) => {
     if (user) {
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
+      user.phone = req.body.phone || user.phone;
+      user.dateOfBirth = req.body.dateOfBirth || user.dateOfBirth;
+      user.gender = req.body.gender || user.gender;
       if (req.body.password) {
         user.password = await bcrypt.hash(req.body.password, 10);
       }
@@ -156,6 +167,15 @@ const updateUserProfile = async (req, res) => {
         name: updatedUser.name,
         email: updatedUser.email,
         profilePic: updatedUser.profilePic,
+        phone: updatedUser.phone,
+        dateOfBirth: updatedUser.dateOfBirth,
+        gender: updatedUser.gender,
+        addresses: updatedUser.addresses,
+        wishlist: updatedUser.wishlist,
+        preferences: updatedUser.preferences,
+        loyaltyPoints: updatedUser.loyaltyPoints,
+        membershipTier: updatedUser.membershipTier,
+        createdAt: updatedUser.createdAt,
       });
     } else {
       res.status(404).json({ message: "User not found" });
@@ -203,6 +223,122 @@ const toggleWishlist = async (req, res) => {
   }
 };
 
+// Address management functions
+const addAddress = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const newAddress = req.body;
+    user.addresses.push(newAddress);
+
+    // If this is the first address or marked as default, set it as default
+    if (user.addresses.length === 1 || newAddress.isDefault) {
+      user.addresses.forEach((addr, index) => {
+        addr.isDefault = index === user.addresses.length - 1;
+      });
+    }
+
+    await user.save();
+    res.status(201).json(user);
+  } catch (error) {
+    console.error('Add address error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const updateAddress = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const addressId = req.params.id;
+    const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === addressId);
+
+    if (addressIndex === -1) {
+      return res.status(404).json({ message: 'Address not found' });
+    }
+
+    const updatedAddress = req.body;
+    user.addresses[addressIndex] = { ...user.addresses[addressIndex].toObject(), ...updatedAddress };
+
+    // Handle default address logic
+    if (updatedAddress.isDefault) {
+      user.addresses.forEach((addr, index) => {
+        addr.isDefault = index === addressIndex;
+      });
+    }
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error('Update address error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const deleteAddress = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const addressId = req.params.id;
+    const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === addressId);
+
+    if (addressIndex === -1) {
+      return res.status(404).json({ message: 'Address not found' });
+    }
+
+    const wasDefault = user.addresses[addressIndex].isDefault;
+    user.addresses.splice(addressIndex, 1);
+
+    // If the deleted address was default and there are other addresses, set the first one as default
+    if (wasDefault && user.addresses.length > 0) {
+      user.addresses[0].isDefault = true;
+    }
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error('Delete address error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+const setDefaultAddress = async (req, res) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const addressId = req.params.id;
+    const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === addressId);
+
+    if (addressIndex === -1) {
+      return res.status(404).json({ message: 'Address not found' });
+    }
+
+    // Set all addresses to non-default, then set the selected one as default
+    user.addresses.forEach(addr => {
+      addr.isDefault = false;
+    });
+    user.addresses[addressIndex].isDefault = true;
+
+    await user.save();
+    res.json(user);
+  } catch (error) {
+    console.error('Set default address error:', error.message);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
 module.exports = {
   googleLogin,
   registerUser,
@@ -210,4 +346,8 @@ module.exports = {
   getUserProfile,
   updateUserProfile,
   toggleWishlist,
+  addAddress,
+  updateAddress,
+  deleteAddress,
+  setDefaultAddress,
 };

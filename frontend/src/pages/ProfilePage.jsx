@@ -103,7 +103,11 @@ const ProfilePage = () => {
               <h2>{user.name}</h2><p className="email">{user.email}</p>
             </div>
           </div>
-          <ProfileStats stats={orderStats} />
+          <ProfileStats
+            stats={orderStats}
+            onStatClick={setActiveTab}
+            wishlistCount={user.wishlist?.length || 0}
+          />
         </div>
       );
       case 'orders': return (

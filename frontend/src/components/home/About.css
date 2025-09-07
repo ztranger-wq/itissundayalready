@@ -1,6 +1,6 @@
 .about-section {
     padding: 5rem 0;
-    background-color: #24282D; /* Surface/Card color */
+    background-color: #dbdee3; /* Surface/Card color */
 }
 
 .about-container {
@@ -16,7 +16,7 @@
 
 .about-image {
     border-radius: 0.5rem;
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
     width: 100%;
     height: auto;
 }
@@ -41,10 +41,10 @@
 }
 
 .ceo-message {
-    background-color: #1A1D21; /* Background color */
+    background-color: #f1f3f6; /* Background color */
     padding: 1.5rem;
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    box-shadow: 0 4px 6px -1px rgba(12, 11, 11, 0.1), 0 2px 4px -2px rgba(34, 32, 32, 0.1);
     margin-top: 1.5rem;
 }
 

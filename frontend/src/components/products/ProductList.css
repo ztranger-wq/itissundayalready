@@ -2,7 +2,7 @@
 
 .product-list-container {
     padding: 3rem 0;
-    background: #fafafa; /* lighter neutral background */
+    background: rgb(225, 216, 216); /* lighter neutral background */
   }
 
   .product-list-header {

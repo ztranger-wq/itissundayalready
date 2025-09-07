@@ -1,5 +1,6 @@
 .featured-products-section {
     padding: 5rem 0;
+    background-color: rgb(255, 255, 255);
 }
 
 .featured-products-section h2 {
@@ -13,15 +14,14 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 1200px;
+    gap: 0px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
 .product-item {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
     aspect-ratio: 1; /* Square items */
 }
 

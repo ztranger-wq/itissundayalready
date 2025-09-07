@@ -6,6 +6,10 @@ const {
   getUserProfile,
   updateUserProfile,
   toggleWishlist,
+  addAddress,
+  updateAddress,
+  deleteAddress,
+  setDefaultAddress,
 } = require("../controllers/authController");
 const { protect } = require("../middleware/authMiddleware");
 
@@ -20,5 +24,11 @@ router.post("/login", loginUser);
 router.get("/profile", protect, getUserProfile);
 router.put("/profile", protect, updateUserProfile);
 router.put("/profile/wishlist", protect, toggleWishlist);
+
+// Address routes (protected)
+router.post("/profile/addresses", protect, addAddress);
+router.put("/profile/addresses/:id", protect, updateAddress);
+router.delete("/profile/addresses/:id", protect, deleteAddress);
+router.put("/profile/addresses/:id/default", protect, setDefaultAddress);
 
 module.exports = router;
