@@ -43,6 +43,7 @@ body {
 }
 @media (max-width: 767px) {
   .logo-container {
+    left: 0.5rem;
     min-width: 100px;
     max-width: 120px;
   }
@@ -260,7 +261,7 @@ body {
   .header-container {
     height: 4.2rem;
   }
-  
+
   .profile-menu {
     display: flex;
   }
@@ -270,21 +271,32 @@ body {
     align-items: center;
     gap: 1.5rem;
   }
-  
+
   .mobile-menu-button-container {
     display: none;
   }
-  
+
   .mobile-nav {
     display: none;
   }
-  
+
   .logo-img {
     height: 3.5rem;
   }
-  
+
   .profile-menu {
-    gap: 1.5rem;
+    gap: 0rem;
+  }
+}
+
+/* Tablet specific adjustments (768px to 1024px) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .search-bar {
+    max-width: 200px;
+  }
+
+  .logo-container {
+    min-width: 180px;
   }
 }
 

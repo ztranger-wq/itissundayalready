@@ -1,0 +1,36 @@
+.track-order-content {
+  text-align: center;
+}
+
+.track-order-placeholder {
+  padding: 3rem 2rem;
+  color: #666;
+}
+
+.track-order-placeholder svg {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+.track-order-placeholder h4 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.track-form {
+  display: flex;
+  gap: 1rem;
+  max-width: 400px;
+  margin: 2rem auto 1rem;
+}
+
+.track-form .form-input {
+  flex: 1;
+}
+
+.note {
+  font-size: 0.875rem;
+  color: #999;
+  font-style: italic;
+}

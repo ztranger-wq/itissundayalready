@@ -260,8 +260,7 @@ main {
 
 /* Focus styles */
 *:focus {
-  outline: 2px solid #e50000;
-  outline-offset: 2px;
+  outline: none;
 }
 
 /* Custom scrollbar */

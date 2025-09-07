@@ -44,14 +44,13 @@
 
   .product-list-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem; /* more airy spacing */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem; /* adjusted for mobile */
     margin-top: 2rem;
   }
 
   @media (min-width: 640px) {
     .product-list-grid {
-      grid-template-columns: repeat(2, 1fr);
       gap: 2.5rem;
     }
   }

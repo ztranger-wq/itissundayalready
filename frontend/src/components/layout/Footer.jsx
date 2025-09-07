@@ -18,15 +18,15 @@ const Footer = () => {
         <div className="contact-info">
           <div className="contact-item">
             <FiPhone className="contact-item-icon" />
-            <a href="tel:+1234567890">+91 12345 67890</a>
+            <a href="tel:+919467283036">+91 9467283036</a>
           </div>
           <div className="contact-item">
             <FiMail className="contact-item-icon" />
-            <a href="mailto:info@msenterprise.com">info@msenterprise.com</a>
+            <a href="mailto:m.s.labels2009@gmail.com">m.s.labels2009@gmail.com</a>
           </div>
           <div className="contact-item">
             <FiMapPin className="contact-item-icon" />
-            <span>Bangalore, Karnataka, India</span>
+            <span>108/25, Mohan Nagar, Sonipat, Haryana, 131001</span>
           </div>
         </div>
 

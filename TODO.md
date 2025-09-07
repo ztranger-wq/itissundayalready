@@ -1,16 +1,18 @@
-# Fix Profile Saving Issues
+# AccountSection Redesign Task
 
-## Issues Identified
-- Gender and Date of Birth not saving in profile update
-- Address not saving due to missing backend routes
-- Profile data (phone, dateOfBirth, gender, addresses) not returned from backend
+## Current Status
+- [x] Analyze current AccountSection.jsx and AccountSection.css
+- [x] Identify emojis to replace with icons
+- [x] Plan modern redesign improvements
 
-## Tasks
-- [x] Update `backend/controllers/authController.js`:
-  - Modify `updateUserProfile` to handle phone, dateOfBirth, gender
-  - Modify `getUserProfile` to return all user fields including phone, dateOfBirth, gender, addresses
-  - Add address management functions: addAddress, updateAddress, deleteAddress, setDefaultAddress
-- [x] Update `backend/routes/authRoutes.js`:
-  - Add routes for address CRUD: POST /profile/addresses, PUT /profile/addresses/:id, DELETE /profile/addresses/:id, PUT /profile/addresses/:id/default
-- [ ] Test profile update for gender and dateOfBirth
-- [ ] Test address saving functionality
+## Pending Tasks
+- [ ] Update AccountSection.jsx with new icons and improved layout
+- [ ] Update AccountSection.css with modern styling
+- [ ] Test the redesigned component for responsiveness
+- [ ] Verify icon consistency with other profile components
+
+## Details
+- Replace all emojis (👤, 🔐, ⚠️, 🚪, 🗑️, 💾, ❌) with appropriate react-icons
+- Improve visual hierarchy and spacing
+- Enhance modern design elements
+- Ensure mobile responsiveness

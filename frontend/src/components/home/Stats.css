@@ -23,8 +23,15 @@
     color: #d1d5db;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .stats-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr) !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 2rem;
     }
 }

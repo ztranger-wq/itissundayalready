@@ -62,7 +62,7 @@
     text-align: right;
     font-weight: 600;
     margin-top: 1rem;
-    color: #A8ADB4; /* Secondary text color */
+    color: black !important;
 }
 
 

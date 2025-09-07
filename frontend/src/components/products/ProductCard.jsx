@@ -75,12 +75,11 @@ const ProductCard = ({ product, index = 0, viewMode = 'grid' }) => {
   };
 
   const formatPrice = (price) => {
-    return new Intl.NumberFormat('en-IN', {
-      style: 'currency',
-      currency: 'INR',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(price);
+    // Remove any existing currency symbols
+    const cleanPrice = String(price).replace(/[₹$€£¥₽₩₦₨₪₫₡₵₺₴₸₼₲₱₭₯₰₳₶₷₹₻₽₾₿]/g, '').trim();
+    const numPrice = parseFloat(cleanPrice);
+    if (isNaN(numPrice)) return '₹0';
+    return `₹${numPrice.toLocaleString('en-IN')}`;
   };
 
   // Ensure product has required properties
